@@ -78,3 +78,41 @@ function calcTotalPages(): void {
 // ============================================================
 
 
+// Task 3.01
+
+function createCustomerID(name: string, id: number): string {
+    return `${id}/${name}`;
+}
+
+// ================================================
+
+const myID: string = createCustomerID('Ann', 10);
+console.log(myID);
+
+// let idGenerator: (name: string, id: number) => string;
+let idGenerator: typeof createCustomerID;
+idGenerator = (name: string, id: number) => `${id}/${name}`;
+idGenerator = createCustomerID;
+
+console.log(idGenerator('Boris', 20));
+
+// Task 3.02
+
+function createCustomer(name: string, age?: number, city?: string): void {
+    console.log(`Customer name: ${name}`);
+    if (age) {
+        console.log(`Customer age: ${age}`);
+    }
+    if (city) {
+        console.log(`Customer city: ${city}`);
+    }
+}
+
+// =================================================
+
+createCustomer('Tosh');
+createCustomer('Tosh', 30);
+createCustomer('Tosh', 30, 'Kyiv');
+
+// =================================================
+
