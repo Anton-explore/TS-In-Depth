@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-redeclare */
 
 showHello('greeting', 'TypeScript');
@@ -20,6 +21,8 @@ enum Category { JavaScript, CSS, HTML, TypeScript, Angular, React}
 //     category: Category;
 // };
 
+type BookProperties = keyof Book; // | 'isbn';
+
 interface Book {
     id: number;
     title: string;
@@ -27,7 +30,14 @@ interface Book {
     available: boolean;
     category: Category;
     pages?: number;
+    // markDamaged?: (reason: string) => void;
+    // markDamaged?(reason: string): void;
+    markDamaged?: DamageLogger;
 };
+
+interface DamageLogger {
+    (reason: string): void;
+}
 
 // interface A {
 //     [prop: string]: string | number;
@@ -213,8 +223,129 @@ const myBook: Book = {
     category: Category.CSS,
     // year: 2015,
     // copies: 3,
-    pages: 200
+    pages: 200,
+    // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`),
+    markDamaged(reason: string) {
+        console.log(`Damaged: ${reason}`);
+    }
 };
-printBook(myBook);
+// printBook(myBook);
+// myBook.markDamaged('missing back cover');
+
+// Task 4.02
+
+const logDamage: DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
+// logDamage('missing back cover');
+
+// Task 4.03
+
+interface Person {
+    name: string;
+    email: string;
+}
+interface Author extends Person {
+    numBooksPublished: number;
+}
+interface Librarian extends Person {
+    department: string;
+    assistCustomer: (custName: string, bookTitle: string) => void;
+}
+
+// const author: Author = {
+//     email: 'exp@exmpl.com',
+//     name: 'Author',
+//     numBooksPublished: 2
+// }
+
+const favoriteAuthor: Author = {
+    name: 'Anna',
+    email: 'anna@example.com',
+    numBooksPublished: 2
+};
+
+const favoriteLibrarian: Librarian = {
+    name: 'Boris',
+    email: 'boris@example.com',
+    department: 'Classical Literature',
+    assistCustomer: null
+};
+
+// Task 4.04
+
+const offer: any = {
+    book: {
+        title: 'Essential Typescript',
+    },
+};
+
+// console.log(offer.magazine);
+// console.log(offer.magazine?.getTitle());
+// console.log(offer.book.getTitle?.());
+// console.log(offer.book.authors?.[10]?.name);
+
+// Task 4.05
+
+function getProperty(book: Book, prop: BookProperties): any {
+    const value = book[prop];
+
+    return typeof value === 'function' ? value.name : value;
+}
+
+// console.log(getProperty(myBook, 'markDamaged'));
+// console.log(getProperty(myBook, 'title'));
+// console.log(getProperty(myBook, 'isbn'));
+
+// Task 5.01
+
+class ReferenceItem {
+    // title: string;
+    // year: number;
+
+    // constructor(newTitle: string, newYear: number) {
+    //     console.log('Creating a new ReferenceItem...');
+    //     this.title = newTitle;
+    //     this.year = newYear;
+    // }
+
+    #id: number;
+
+    private _publisher: string;
+
+    get publisher(): string {
+        return this._publisher.toUpperCase();
+    }
+
+    set publisher(newPublisher: string) {
+        this._publisher = newPublisher;
+    }
+
+    static department: string = 'Research Dep.';
+
+    constructor(
+        id: number,
+        public title: string,
+        private year: number
+    ) {
+        console.log('Creating a new ReferenceItem...');
+        this.#id = id;
+    }
+
+    printItem(): void {
+        console.log(`${this.title} was published in ${this.year}`);
+        console.log(ReferenceItem.department);
+        console.log(Object.getPrototypeOf(this).constructor.department);
+    }
+
+    getID(): number {
+        return this.#id;
+    }
+}
+
+const ref = new ReferenceItem(1,'Learn Typescript', 2022);
+console.log(ref);
+ref.printItem();
+ref.publisher = 'ABC group'; // setter
+console.log(ref.publisher); // getter
+console.log(ref.getID());
 
 
