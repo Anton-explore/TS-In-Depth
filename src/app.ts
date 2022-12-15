@@ -1,4 +1,4 @@
-import { ReferenceItem, UL, RefBook, Library } from './classes';
+import { ReferenceItem, UL, RefBook, Library, Shelf } from './classes';
 import { Category } from './enums';
 import * as func from './functions';
 import * as interfaces from './interfaces';
@@ -243,7 +243,7 @@ func.printRefBook(refBook);
 let library: Library = new Lib();
 
 
-// 7.01
+// Task 7.01
 
 const inventory: interfaces.Book[] = [
     { id: 10, title: 'The C Programming Language', author: '???', available: true, category: Category.Software},
@@ -252,12 +252,33 @@ const inventory: interfaces.Book[] = [
     { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
 ];
 
-const result = func.purge(['123','234','345']);
-console.log(result);
-const result1 = func.purge(inventory);
-console.log(result1);
-const result3 = func.purge([1, 2, 3]);
-console.log(result3);
+// const result = func.purge(['123','234','345']);
+// console.log(result);
+// const result1 = func.purge(inventory);
+// console.log(result1);
+// const result3 = func.purge([1, 2, 3]);
+// console.log(result3);
 
 
+// Task 7.02, 7.03
+
+// const bookShelf = new Shelf<interfaces.Book>();
+// inventory.forEach(book => bookShelf.add(book));
+// console.log(bookShelf.getFirst().title);
+
+const magazines: interfaces.Magazine[] = [
+    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+    { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+    { title: 'Five Points', publisher: 'GSU' }
+];
+
+const magazineShelf = new Shelf<interfaces.Magazine>();
+magazines.forEach(mag => magazineShelf.add(mag));
+// console.log(magazineShelf.getFirst().title);
+
+magazineShelf.printTitles();
+console.log(magazineShelf.find('Five Points'));
+
+console.log(func.getObjectProperty(magazines[0], 'title'));
+console.log(func.getObjectProperty<interfaces.Book, 'author' | 'title'>(inventory[1], 'author'));
 
