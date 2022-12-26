@@ -3,7 +3,7 @@ import { Category } from './enums';
 import * as func from './functions';
 import * as interfaces from './interfaces';
 import { Library as Lib } from './classes/library';
-import { PersonBook } from './types';
+import { BookRequiredFields, CreateCustomerFunctionType, PersonBook, UpdatedBook } from './types';
 
 
 showHello('greeting', 'TypeScript');
@@ -276,9 +276,36 @@ const magazineShelf = new Shelf<interfaces.Magazine>();
 magazines.forEach(mag => magazineShelf.add(mag));
 // console.log(magazineShelf.getFirst().title);
 
-magazineShelf.printTitles();
-console.log(magazineShelf.find('Five Points'));
+// magazineShelf.printTitles();
+// console.log(magazineShelf.find('Five Points'));
 
-console.log(func.getObjectProperty(magazines[0], 'title'));
-console.log(func.getObjectProperty<interfaces.Book, 'author' | 'title'>(inventory[1], 'author'));
+// console.log(func.getObjectProperty(magazines[0], 'title'));
+// console.log(func.getObjectProperty<interfaces.Book, 'author' | 'title'>(inventory[1], 'author'));
 
+// Task 7.04
+
+// const bookRequiredFields: BookRequiredFields = {
+//     author: 'Anna',
+//     available: false,
+//     category: Category.Angular,
+//     id: 1,
+//     markDamaged: null,
+//     pages: 200,
+//     title: 'Learn Angular'
+// };
+// const updatedBook: UpdatedBook = {
+//     id: 1,
+//     pages: 300
+// };
+
+// let params: Parameters<CreateCustomerFunctionType>;
+// params = ['Anna', 30, 'Kyiv'];
+// func.createCustomer(...params);
+
+
+
+// Task 8.07
+// const refBook: RefBook = new RefBook(1, 'Learn Typescript');
+// refBook.copies = 10;
+// refBook.copies = -10;
+// console.log(refBook.copies);

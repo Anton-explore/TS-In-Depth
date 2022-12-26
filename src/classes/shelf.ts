@@ -12,7 +12,7 @@ export default class Shelf<T extends ShelfItem> {
     }
 
     find(title: string): T {
-        return this.items.find((item: T) => item.title === title);
+        return this.items.find(item => item.title === title);
     }
 
     printTitles(): void {
