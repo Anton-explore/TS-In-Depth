@@ -6,21 +6,7 @@ import { Library as Lib } from './classes/library';
 import { BookRequiredFields, CreateCustomerFunctionType, PersonBook, UpdatedBook } from './types';
 
 
-showHello('greeting', 'TypeScript');
-
-function showHello(divName: string, name: string) {
-    const elt = document.getElementById(divName);
-    elt.innerText = `Hello from ${name}`;
-}
-
-
-// --------------------------------------------------------
-
-
-
-
-
-
+func.showHello('greeting', 'TypeScript');
 
 // =========================================================
 // Task 02.01
@@ -36,29 +22,25 @@ function showHello(divName: string, name: string) {
 
 // Task 3.01
 
-
-
 // ================================================
 
-const myID: string = func.createCustomerID('Ann', 10);
-console.log(myID);
+// const myID: string = func.createCustomerID('Ann', 10);
+// console.log(myID);
 
 // let idGenerator: (name: string, id: number) => string;
-let idGenerator: typeof func.createCustomerID;
-idGenerator = (name: string, id: number) => `${id}/${name}`;
-idGenerator = func.createCustomerID;
+// let idGenerator: typeof func.createCustomerID;
+// idGenerator = (name: string, id: number) => `${id}/${name}`;
+// idGenerator = func.createCustomerID;
 
-console.log(idGenerator('Boris', 20));
+// console.log(idGenerator('Boris', 20));
 
 // Task 3.02
 
-
-
 // =================================================
 
-func.createCustomer('Tosh');
-func.createCustomer('Tosh', 30);
-func.createCustomer('Tosh', 30, 'Kyiv');
+// func.createCustomer('Tosh');
+// func.createCustomer('Tosh', 30);
+// func.createCustomer('Tosh', 30, 'Kyiv');
 
 // =================================================
 
@@ -83,14 +65,13 @@ func.createCustomer('Tosh', 30, 'Kyiv');
 
 // Task 03.04
 
-
-
 // console.log(bookTitleTransform('Learn Typescript'));
 // console.log(bookTitleTransform(123));
 // console.log(bookTitleTransform({}));
 
-// Task 04.01
+// ===============================================================
 
+// Task 04.01
 
 const myBook: interfaces.Book = {
     id: 5,
@@ -111,12 +92,11 @@ const myBook: interfaces.Book = {
 
 // Task 4.02
 
-const logDamage: interfaces.Logger = (reason: string) => console.log(`Damaged: ${reason}`);
+// const logDamage: interfaces.Logger = (reason: string) => console.log(`Damaged: ${reason}`);
 // const logDamage: interfaces.DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
 // logDamage('missing back cover');
 
 // Task 4.03
-
 
 // const author: Author = {
 //     email: 'exp@exmpl.com',
@@ -152,14 +132,13 @@ const offer: any = {
 
 // Task 4.05
 
-
-
 // console.log(getProperty(myBook, 'markDamaged'));
 // console.log(getProperty(myBook, 'title'));
 // console.log(getProperty(myBook, 'isbn'));
 
-// Task 5.01
+// ===============================================================
 
+// Task 5.01
 
 // const ref = new ReferenceItem(1,'Learn Typescript', 2022);
 // console.log(ref);
@@ -170,19 +149,13 @@ const offer: any = {
 
 // Task 5.02, 5.03
 
-
-
 // const refBook: RefBook = new RefBook(1, 'Learn Typescript', 2022, 2);
 // refBook.printItem();
 // console.log(refBook);
 // console.log(refBook.getID());
 // refBook.printCitation();
 
-
 // Task 5.04
-
-
-
 
 // Task 5.05
 
@@ -202,12 +175,14 @@ const personBook: PersonBook = {
 // console.log(options2);
 // console.log(Object.is(options, options2));
 
+// ===============================================================
+
 // Task 6.01
 
 // Task 6.03, 6.04
 
-const refBook: RefBook = new RefBook(1, 'Learn Typescript', 2022, 2);
-func.printRefBook(refBook);
+// const refBook: RefBook = new RefBook(1, 'Learn Typescript', 2022, 2);
+// func.printRefBook(refBook);
 
 // const favoriteLibrarian: interfaces.Librarian = new UL.UniversityLibrarian();
 
@@ -240,8 +215,9 @@ func.printRefBook(refBook);
 
 
 //  Task 6.06
-let library: Library = new Lib();
+// let library: Library = new Lib();
 
+// ===============================================================
 
 // Task 7.01
 
@@ -266,14 +242,14 @@ const inventory: interfaces.Book[] = [
 // inventory.forEach(book => bookShelf.add(book));
 // console.log(bookShelf.getFirst().title);
 
-const magazines: interfaces.Magazine[] = [
-    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
-    { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
-    { title: 'Five Points', publisher: 'GSU' }
-];
+// const magazines: interfaces.Magazine[] = [
+//     { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+//     { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+//     { title: 'Five Points', publisher: 'GSU' }
+// ];
 
-const magazineShelf = new Shelf<interfaces.Magazine>();
-magazines.forEach(mag => magazineShelf.add(mag));
+// const magazineShelf = new Shelf<interfaces.Magazine>();
+// magazines.forEach(mag => magazineShelf.add(mag));
 // console.log(magazineShelf.getFirst().title);
 
 // magazineShelf.printTitles();
@@ -302,10 +278,92 @@ magazines.forEach(mag => magazineShelf.add(mag));
 // params = ['Anna', 30, 'Kyiv'];
 // func.createCustomer(...params);
 
+// ===============================================================
+// Decorators
+// ===============================================================
 
+// Task 8.01, 8.02
+// const favoriteLibrarian1 = new UL.UniversityLibrarian();
+// const favoriteLibrarian2 = new UL.UniversityLibrarian();
+// favoriteLibrarian1['a'] = 1;
+// UL.UniversityLibrarian['a'] = 2; // не добавит
+// UL.UniversityLibrarian.prototype['a'] = 3; // не добавит
+
+// console.log(favoriteLibrarian1);
+// favoriteLibrarian1.name = 'Anna';
+// favoriteLibrarian1['printLibrarian']();
+
+// Task 8.03
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// console.log(favoriteLibrarian);
+// favoriteLibrarian.assistFaculty = null;
+// favoriteLibrarian.teachCommunity = null;
+
+// Task 8.04
+// const refBook: RefBook = new RefBook(1, 'Learn Typescript', 2022, 2);
+// refBook.printItem();
+
+// Task 8.05
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// console.log(favoriteLibrarian);
+// favoriteLibrarian.name = 'Anna';
+// favoriteLibrarian.assistCustomer('Boris', 'Learn Typescript');
+
+// Task 8.06
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// favoriteLibrarian.name = 'Anna';
+// console.log(favoriteLibrarian.name);
+// favoriteLibrarian.assistCustomer('Boris', 'Learn Typescript');
+// console.log(favoriteLibrarian);
 
 // Task 8.07
-// const refBook: RefBook = new RefBook(1, 'Learn Typescript');
-// refBook.copies = 10;
+const refBook: RefBook = new RefBook(1, 'Learn Typescript', 2022, 2);
+console.log(refBook.copies);
+refBook.copies = 10;
 // refBook.copies = -10;
 // console.log(refBook.copies);
+
+// ===============================================================
+// Async typescript
+// ===============================================================
+
+// Task 9.01
+
+// console.log('Begin');
+// func.getBooksByCategory(Category.JavaScript, func.logCategorySearch);
+// func.getBooksByCategory(Category.Software, func.logCategorySearch);
+// console.log('End');
+
+// Task 9.02
+
+// console.log('Begin');
+// func.getBooksByCategoryPromise(Category.JavaScript)
+//     .then(titles => {
+//         console.log(titles);
+//         return Promise.resolve(titles.length);
+//     })
+//     .then(num => console.log(num))
+//     .catch(reason => console.log(reason));
+// func.getBooksByCategoryPromise(Category.Software)
+//     .then(titles => console.log(titles))
+//     .catch(reason => console.log(reason));
+// console.log('End');
+
+// Task 9.03
+
+// console.log('Begin');
+// func.logSearchResult(Category.JavaScript);
+// func.logSearchResult(Category.Software)
+//     .catch(err => console.log(err));
+// console.log('End');
+
+// Extra, DOM elements type
+
+// const el1 = document.querySelector<HTMLElement>('#greeting');
+// console.log(el1);
+
+// if (el1 instanceof HTMLElement) {
+//     console.log('+++');
+// } else {
+//     console.log('---');
+// }

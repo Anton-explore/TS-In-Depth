@@ -1,10 +1,16 @@
 /* eslint-disable no-redeclare */
 
-import { Author, Book, Librarian, Person, TOptions, A, Logger } from './interfaces';
+import { Author, Book, Librarian, Person, TOptions, A, Logger, LibMgrCallback, Callback } from './interfaces';
 import { Category } from './enums';
 import { BookProperties } from './types';
 import RefBook from './classes/encyclopedia';
 import { BookOrUndefined } from './types';
+
+
+export function showHello(divName: string, name: string) {
+    const elt = document.getElementById(divName);
+    elt.innerText = `Hello from ${name}`;
+}
 
 export function getAllBooks(): readonly Book[] {
     const books = <const>[
@@ -153,3 +159,77 @@ export function getObjectProperty<TObject, TKey extends keyof TObject>(obj: TObj
     const value = obj[prop];
     return typeof value === 'function' ? value.name : value;
 }
+
+export function getBooksByCategory(category: Category, callback: LibMgrCallback): void {
+    setTimeout(() => {
+        try {
+            const titles = getBookTitlesByCategory(category);
+
+            if (titles.length > 0) {
+                callback(null, titles);
+            } else {
+                throw new Error('No books found');
+            }
+        } catch (error) {
+            callback(error, null);
+        }
+    }, 2000);
+}
+
+// export function getBooksByCategory(category: Category, callback: Callback<string[]>): void {
+//     setTimeout(() => {
+//         try {
+//             const titles = getBookTitlesByCategory(category);
+
+//             if (titles.length > 0) {
+//                 callback(null, titles);
+//             } else {
+//                 throw new Error('No books found');
+//             }
+//         } catch (error) {
+//             callback(error, null);
+//         }
+//     }, 2000);
+// }
+
+export function logCategorySearch(err: Error | null, titles: string[] | null): void {
+    if (err) {
+        console.log(err.message);
+    } else {
+        console.log(titles);
+    }
+}
+
+export function getBooksByCategoryPromise(category: Category): Promise<string[]> {
+    const p: Promise<string[]> = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const titles = getBookTitlesByCategory(category);
+            if (titles.length > 0) {
+                resolve(titles);
+            } else {
+                reject('No books found');
+            }
+        }, 2000);
+    });
+
+    return p;
+}
+
+export async function logSearchResult(category: Category) {
+    const titles = await getBooksByCategoryPromise(category);
+    console.log(titles.length);
+    return titles;
+}
+// async-await always return promise
+
+// variant 2 with try-catch in function
+// async function logSearchResult(category: Category) {
+//     try {
+//         const titles = await getBooksByCategoryPromise(category);
+//         console.log(titles.length);
+//         return titles;
+//     } catch (err){
+//         console.log(err);
+//     }
+//     await Promise.all([p1, p2, p3]);
+// }

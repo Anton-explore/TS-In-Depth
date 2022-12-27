@@ -61,6 +61,6 @@ module.exports = {
     devtool: 'source-map',
 
     experiments: {
-        topLevelAwait: true
+        topLevelAwait: true,
     }
 };
