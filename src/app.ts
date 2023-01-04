@@ -321,7 +321,7 @@ const refBook: RefBook = new RefBook(1, 'Learn Typescript', 2022, 2);
 console.log(refBook.copies);
 refBook.copies = 10;
 // refBook.copies = -10;
-// console.log(refBook.copies);
+console.log(refBook.copies);
 
 // ===============================================================
 // Async typescript

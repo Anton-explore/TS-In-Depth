@@ -136,7 +136,7 @@ export function positiveInteger(target: any, propName: string, descriptor: Prope
         }
 
         if (originalSet) {
-            originalSet.call(this.value);
+            originalSet.call(this, value);
         }
     };
 
